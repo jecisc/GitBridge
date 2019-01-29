@@ -8,6 +8,16 @@ Class {
 }
 
 { #category : #assessing }
+GitBridge class >> closestVersion [
+	^ self tagsOfClosestTaggedAncestor ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ]
+]
+
+{ #category : #assessing }
+GitBridge class >> currentBranchName [
+	^ self icebergRepository branchName
+]
+
+{ #category : #assessing }
 GitBridge class >> findIcebergRepository [
 	^ IceRepository registry detect: [ :each | each includesPackageNamed: self package name ] ifNone: [ GBRepositoryNotFound signalFor: self ]
 ]
@@ -40,9 +50,26 @@ GitBridge class >> root [
 	^ location
 ]
 
+{ #category : #assessing }
+GitBridge class >> sourceDirectory [
+	^ self icebergRepository subdirectoryReference
+]
+
 { #category : #'system startup' }
 GitBridge class >> startUp [
 	self reset
+]
+
+{ #category : #assessing }
+GitBridge class >> tagsOfClosestTaggedAncestor [
+	self icebergRepository workingCopy referenceCommit commitsDo: [ :commit | commit tags ifNotEmpty: [ :collection | ^ collection ] ].
+	
+	^ #()
+]
+
+{ #category : #assessing }
+GitBridge class >> tagsOfCurrentCommit [
+	^ self icebergRepository workingCopy referenceCommit tags
 ]
 
 { #category : #TODO }
@@ -55,4 +82,18 @@ GitBridge class >> todo [
 	- Current tag
 	- Manage multiple repo
 	- Add way to add conditions"
+]
+
+{ #category : #assessing }
+GitBridge class >> version [
+	^ self tagsOfCurrentCommit ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ]
+]
+
+{ #category : #assessing }
+GitBridge class >> versionOrBranchNameWithLastTag [
+	"If there is more than one tag, take randomly."
+
+	^ self tagsOfCurrentCommit
+		ifEmpty: [ self tagsOfClosestTaggedAncestor ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | '{1} (from {2})' format: {self currentBranchName . tags anyOne name} ] ]
+		ifNotEmpty: [ :tags | tags anyOne name ]
 ]
