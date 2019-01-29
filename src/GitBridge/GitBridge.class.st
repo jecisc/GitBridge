@@ -9,12 +9,21 @@ Class {
 
 { #category : #assessing }
 GitBridge class >> closestVersion [
-	^ self tagsOfClosestTaggedAncestor ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ]
+	^ self
+		do: [ self tagsOfClosestTaggedAncestor ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ] ]
+		onRepositoryProblem: [ 'No repository' ]
 ]
 
 { #category : #assessing }
 GitBridge class >> currentBranchName [
 	^ self icebergRepository branchName
+]
+
+{ #category : #'as yet unclassified' }
+GitBridge class >> do: aBlock onRepositoryProblem: anotherBlock [
+	^ [ aBlock value ]
+		on: GBError
+		do: anotherBlock
 ]
 
 { #category : #assessing }
@@ -86,14 +95,18 @@ GitBridge class >> todo [
 
 { #category : #assessing }
 GitBridge class >> version [
-	^ self tagsOfCurrentCommit ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ]
+	^ self
+		do: [ self tagsOfCurrentCommit ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ] ]
+		onRepositoryProblem: [ 'No repository' ]
 ]
 
 { #category : #assessing }
 GitBridge class >> versionOrBranchNameWithLastTag [
 	"If there is more than one tag, take randomly."
 
-	^ self tagsOfCurrentCommit
-		ifEmpty: [ self tagsOfClosestTaggedAncestor ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | '{1} (from {2})' format: {self currentBranchName . tags anyOne name} ] ]
-		ifNotEmpty: [ :tags | tags anyOne name ]
+	^ self
+		do: [ self tagsOfCurrentCommit
+				ifEmpty: [ self tagsOfClosestTaggedAncestor ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | '{1} (from {2})' format: {self currentBranchName . tags anyOne name} ] ]
+				ifNotEmpty: [ :tags | tags anyOne name ] ]
+		onRepositoryProblem: [ 'No repository' ]
 ]

@@ -1,9 +1,6 @@
 Class {
 	#name : #GBRepositoryWithoutLocalRepository,
-	#superclass : #Error,
-	#instVars : [
-		'bridge'
-	],
+	#superclass : #GBError,
 	#category : #GitBridge
 }
 
@@ -12,16 +9,6 @@ GBRepositoryWithoutLocalRepository class >> signalFor: aGitBridge [
 	^ self new
 		bridge: aGitBridge;
 		signal
-]
-
-{ #category : #accessing }
-GBRepositoryWithoutLocalRepository >> bridge [
-	^ bridge
-]
-
-{ #category : #accessing }
-GBRepositoryWithoutLocalRepository >> bridge: anObject [
-	bridge := anObject
 ]
 
 { #category : #accessing }
