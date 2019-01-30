@@ -13,5 +13,14 @@ GBRepositoryNotFound class >> signalFor: aGitBridge [
 
 { #category : #accessing }
 GBRepositoryNotFound >> messageText [
-	^ 'Bridge not found. Associate an Iceberg repository containing the package ' , self bridge package name , ' to use the bridge.'
+	^ String
+		streamContents: [ :stream | 
+			stream
+				<< 'Bridge not found. Associate an Iceberg repository containing the package ';
+				<< self bridge package name;
+				<< ' to use the bridge.';
+				lf;
+				<< 'Available repositories:';
+				lf.
+			IceRepository registry do: [ :each | stream << '- ' << each name ] separatedBy: [ stream lf ] ]
 ]
