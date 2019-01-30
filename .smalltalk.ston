@@ -7,5 +7,5 @@ SmalltalkCISpec {
   ],
   #preTesting : SCICustomScript {
     #path : 'resources/ci/addRepoToIceberg.st'
-  },
+  }
 }
