@@ -1,4 +1,4 @@
 (IceRepositoryCreator new
-		location: './jecisc/GitBridge';
+		location: './jecisc/GitBridge' asFileReference;
 		subdirectory: 'src';
 		createRepository) register
