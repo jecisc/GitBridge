@@ -19,7 +19,7 @@ GitBridge class >> currentBranchName [
 	^ self icebergRepository branchName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #execution }
 GitBridge class >> do: aBlock onRepositoryProblem: anotherBlock [
 	^ [ aBlock value ]
 		on: GBError
@@ -70,6 +70,11 @@ GitBridge class >> startUp [
 ]
 
 { #category : #assessing }
+GitBridge class >> tags [
+	^ self icebergRepository tags
+]
+
+{ #category : #assessing }
 GitBridge class >> tagsOfClosestTaggedAncestor [
 	self icebergRepository workingCopy referenceCommit commitsDo: [ :commit | commit tags ifNotEmpty: [ :collection | ^ collection ] ].
 	
@@ -90,7 +95,8 @@ GitBridge class >> todo [
 	- Last tag
 	- Current tag
 	- Manage multiple repo
-	- Add way to add conditions"
+	- Add way to add conditions
+	- Tests"
 ]
 
 { #category : #assessing }
