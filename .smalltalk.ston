@@ -4,5 +4,8 @@ SmalltalkCISpec {
       #baseline : 'GitBridge',
       #directory : 'src'
     }
-  ]
+  ],
+  #preTesting : SCICustomScript {
+    #path : 'resources/ci/addRepoToIceberg.st'
+  },
 }
