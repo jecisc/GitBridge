@@ -32,6 +32,11 @@ GitBridge class >> findIcebergRepository [
 ]
 
 { #category : #assessing }
+GitBridge class >> gitTags [
+	^ self icebergRepository tags
+]
+
+{ #category : #assessing }
 GitBridge class >> icebergRepository [
 	^ repositoryCache ifNil: [ repositoryCache := self findIcebergRepository ]
 ]
@@ -67,11 +72,6 @@ GitBridge class >> sourceDirectory [
 { #category : #'system startup' }
 GitBridge class >> startUp [
 	self reset
-]
-
-{ #category : #assessing }
-GitBridge class >> tags [
-	^ self icebergRepository tags
 ]
 
 { #category : #assessing }
