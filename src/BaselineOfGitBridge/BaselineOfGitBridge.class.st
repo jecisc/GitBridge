@@ -9,8 +9,7 @@ BaselineOfGitBridge >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
-		do: [
-			"Packages"
+		do: [ "Packages"
 			spec
 				package: 'GitBridge';
 				package: 'GitBridge-Tests' with: [ spec requires: #('GitBridge') ].
@@ -18,7 +17,17 @@ BaselineOfGitBridge >> baseline: spec [
 			"Group"
 			spec
 				group: 'Minimal' with: #('GitBridge');
-				group: 'Tests' with: #('GitBridge-Tests') ]
+				group: 'Tests' with: #('GitBridge-Tests') ].
+
+	spec
+		for: #'pharo7.x'
+		do: [ self nativeBrowser: spec.
+			spec package: 'GitBridge' with: [ spec requires: #('NativeBrowser') ] ]
+]
+
+{ #category : #dependencies }
+BaselineOfGitBridge >> nativeBrowser: spec [
+	spec baseline: 'NativeBrowser' with: [ spec repository: 'github://jecisc/Native-Browser:v1.x.x/src' ]
 ]
 
 { #category : #accessing }

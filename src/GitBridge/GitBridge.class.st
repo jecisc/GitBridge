@@ -51,6 +51,11 @@ GitBridge class >> isAbstract [
 	^ self = GitBridge
 ]
 
+{ #category : #actions }
+GitBridge class >> openInNativeFileSystem [
+	self root openInNativeBrowser
+]
+
 { #category : #'class initialization' }
 GitBridge class >> reset [
 	repositoryCache := nil
