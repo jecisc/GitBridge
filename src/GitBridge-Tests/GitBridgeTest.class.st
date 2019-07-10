@@ -14,6 +14,11 @@ GitBridgeTest >> setUp [
 ]
 
 { #category : #tests }
+GitBridgeTest >> testGitTags [
+	self assert: (bridge gitTags anySatisfy: [ :tag | tag name = 'tagForTests' ])
+]
+
+{ #category : #tests }
 GitBridgeTest >> testIcebergRepository [
 	self shouldnt: [ bridge icebergRepository ] raise: Error.
 	self assert: (bridge testResources / 'testFile.txt') contents equals: 'test'
@@ -29,11 +34,6 @@ GitBridgeTest >> testRoot [
 GitBridgeTest >> testSourceDirectory [
 	self assert: bridge sourceDirectory exists.
 	self assert: bridge sourceDirectory basename equals: 'src'
-]
-
-{ #category : #tests }
-GitBridgeTest >> testTags [
-	self assert: (bridge tags anySatisfy: [ :tag | tag name = 'tagForTests' ])
 ]
 
 { #category : #tests }
