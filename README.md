@@ -27,7 +27,45 @@ Note that you can replace the #v1.x.x by another branch such as #development or 
 
 ## Quick start
 
-TODO
+In order to create a GitBridge to your project, you first need to subclass `GitBridge` and to store your bridge in a package of your project.
+
+```Smalltalk
+GitBridge subclass: #MyProjectBridge
+	slots: {  }
+	classVariables: {  }
+	package: 'MyProject'
+```
+
+This new bridge need a class initialization like this one:
+
+```Smalltalk
+MyProjectBridge class>>initialize
+	SessionManager default registerSystemClassNamed: self name
+```
+
+This will allow the bridge to reset some cache at the image startup.
+
+Now that your bridge is created, if it find an Iceberg repository, associated to its local clone, containing the package in which the bridge is defined, you will be able to use the bridge to access some resources.
+
+For example you can get a file reference to the git folder like this:
+
+```Smalltalk
+MyProjectBridge root
+```
+
+You can open the git repository by executing:
+
+```Smalltalk
+MyProjectBridge openInNativeFileSystem
+```
+
+You can get the version of you project by executing:
+
+```Smalltalk
+MyProjectBridge versionOrBranchNameWithLastTag
+```
+
+For more informations see the following documentation.
 
 ## Documentation
 
