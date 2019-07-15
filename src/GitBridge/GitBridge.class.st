@@ -28,7 +28,7 @@ GitBridge class >> do: aBlock onRepositoryProblem: anotherBlock [
 
 { #category : #actions }
 GitBridge class >> findIcebergRepository [
-	^ IceRepository registry detect: [ :each | each includesPackageNamed: self package name ] ifNone: [ GBRepositoryNotFound signalFor: self ]
+	^ IceRepository registry detect: [ :each | (each includesPackageNamed: self package name) and: [ self isValidRepositoryForBridge: each ] ] ifNone: [ GBRepositoryNotFound signalFor: self ]
 ]
 
 { #category : #versions }
@@ -49,6 +49,11 @@ GitBridge class >> initialize [
 { #category : #testing }
 GitBridge class >> isAbstract [
 	^ self = GitBridge
+]
+
+{ #category : #testing }
+GitBridge class >> isValidRepositoryForBridge: anIcebergRepository [
+	^ true
 ]
 
 { #category : #actions }
@@ -89,18 +94,6 @@ GitBridge class >> tagsOfClosestTaggedAncestor [
 { #category : #versions }
 GitBridge class >> tagsOfCurrentCommit [
 	^ self icebergRepository workingCopy referenceCommit tags
-]
-
-{ #category : #TODO }
-GitBridge class >> todo [
-	self flag: #todo.
-	
-	"
-	- Last tag
-	- Current tag
-	- Manage multiple repo
-	- Add way to add conditions
-	- Tests"
 ]
 
 { #category : #versions }
