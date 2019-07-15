@@ -7,14 +7,14 @@ Class {
 	#category : #GitBridge
 }
 
-{ #category : #assessing }
+{ #category : #versions }
 GitBridge class >> closestVersion [
 	^ self
 		do: [ self tagsOfClosestTaggedAncestor ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ] ]
 		onRepositoryProblem: [ 'No repository' ]
 ]
 
-{ #category : #assessing }
+{ #category : #versions }
 GitBridge class >> currentBranchName [
 	^ self icebergRepository branchName
 ]
@@ -26,12 +26,12 @@ GitBridge class >> do: aBlock onRepositoryProblem: anotherBlock [
 		do: anotherBlock
 ]
 
-{ #category : #assessing }
+{ #category : #actions }
 GitBridge class >> findIcebergRepository [
 	^ IceRepository registry detect: [ :each | each includesPackageNamed: self package name ] ifNone: [ GBRepositoryNotFound signalFor: self ]
 ]
 
-{ #category : #assessing }
+{ #category : #versions }
 GitBridge class >> gitTags [
 	^ self icebergRepository tags
 ]
@@ -79,14 +79,14 @@ GitBridge class >> startUp [
 	self reset
 ]
 
-{ #category : #assessing }
+{ #category : #versions }
 GitBridge class >> tagsOfClosestTaggedAncestor [
 	self icebergRepository workingCopy referenceCommit commitsDo: [ :commit | commit tags ifNotEmpty: [ :collection | ^ collection ] ].
 	
 	^ #()
 ]
 
-{ #category : #assessing }
+{ #category : #versions }
 GitBridge class >> tagsOfCurrentCommit [
 	^ self icebergRepository workingCopy referenceCommit tags
 ]
@@ -96,7 +96,6 @@ GitBridge class >> todo [
 	self flag: #todo.
 	
 	"
-	- Open natively
 	- Last tag
 	- Current tag
 	- Manage multiple repo
@@ -104,14 +103,14 @@ GitBridge class >> todo [
 	- Tests"
 ]
 
-{ #category : #assessing }
+{ #category : #versions }
 GitBridge class >> version [
 	^ self
 		do: [ self tagsOfCurrentCommit ifEmpty: [ self currentBranchName ] ifNotEmpty: [ :tags | "If there is more than one, take randomly." tags anyOne name ] ]
 		onRepositoryProblem: [ 'No repository' ]
 ]
 
-{ #category : #assessing }
+{ #category : #versions }
 GitBridge class >> versionOrBranchNameWithLastTag [
 	"If there is more than one tag, take randomly."
 
