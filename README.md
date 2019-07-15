@@ -4,6 +4,13 @@
 
 GitBridge is a project allow Pharo projects to communicate with the git repository storing them. Once the bridge is made, you can access ressources or informations about the repository.
 
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Documentation](#documentation)
+- [Version management](#version-management)
+- [Smalltalk versions compatibility](#smalltalk-versions-compatibility)
+- [Contact](#contact)
+
 ## Installation
 
 To install GitBridge in your Pharo image execute:
@@ -69,11 +76,7 @@ For more informations see the following documentation.
 
 ## Documentation
 
-TODO
-
-Documentation is split into separate links as follows:
-* [User documentation](documentation/UserGuide.md) 
-* [Developer documentation](documentation/DevelopmentGuide.md)
+You can find the full documentation here : [User documentation](resources/documentation/UserGuide.md).
 
 ## Version management 
 
