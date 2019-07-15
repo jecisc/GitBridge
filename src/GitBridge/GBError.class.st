@@ -1,3 +1,9 @@
+"
+Description
+--------------------
+
+I am a common superclass for all GitBridge errors.
+"
 Class {
 	#name : #GBError,
 	#superclass : #Error,
@@ -6,6 +12,13 @@ Class {
 	],
 	#category : #GitBridge
 }
+
+{ #category : #signalling }
+GBError class >> signalFor: aGitBridge [
+	^ self new
+		bridge: aGitBridge;
+		signal
+]
 
 { #category : #accessing }
 GBError >> bridge [

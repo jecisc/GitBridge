@@ -1,3 +1,9 @@
+"
+Description
+--------------------
+
+I am a git bridge for the GitBridge project. I mostly serve as example and for tests.
+"
 Class {
 	#name : #GBBridge,
 	#superclass : #GitBridge,

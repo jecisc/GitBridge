@@ -1,15 +1,19 @@
+"
+Description
+--------------------
+
+I am an error raised when an Iceberg corresponding to the current bridge is found but does not have a local repository.
+
+Examples
+--------------------
+
+	GBRepositoryWithoutLocalRepository signalFor: GBBridge
+"
 Class {
 	#name : #GBRepositoryWithoutLocalRepository,
 	#superclass : #GBError,
 	#category : #GitBridge
 }
-
-{ #category : #signalling }
-GBRepositoryWithoutLocalRepository class >> signalFor: aGitBridge [
-	^ self new
-		bridge: aGitBridge;
-		signal
-]
 
 { #category : #accessing }
 GBRepositoryWithoutLocalRepository >> messageText [

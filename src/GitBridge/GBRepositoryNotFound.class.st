@@ -1,15 +1,19 @@
+"
+Description
+--------------------
+
+I am an error raised when no repository in Iceberg correspond to the current bridge.
+
+Examples
+--------------------
+
+	GBRepositoryNotFound signalFor: GBBridge
+"
 Class {
 	#name : #GBRepositoryNotFound,
 	#superclass : #GBError,
 	#category : #GitBridge
 }
-
-{ #category : #signalling }
-GBRepositoryNotFound class >> signalFor: aGitBridge [
-	^ self new
-		bridge: aGitBridge;
-		signal
-]
 
 { #category : #accessing }
 GBRepositoryNotFound >> messageText [

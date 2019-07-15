@@ -1,3 +1,46 @@
+"
+Description
+--------------------
+
+I am an abstract superclass for git bridge.
+
+My subclass should includes an initialize class method calling: `SessionManager default registerSystemClassNamed: self name`.
+
+My subclasses will be used as a bridge to a git repository for a project. Then they will be used to access things such has:
+- Resources stored in the git repository
+- Git informations such the the current version of the project (tag)
+- ...
+
+In order to find those information, GitBridge will check the repositories registered in Iceberg and find the first one containing the package storing the GitBridge.
+
+You can add more/different condition by overriding the method #isValidRepository:.
+
+A cache containing the found repository will be created and flush at each startup.
+
+In case no valid repository is present, an error will be thrown.
+
+
+Examples with GBBrigde
+--------------------
+
+	GBBridge root. ""File @ C:\Users\JeCisC\Pharo\GitRepositories\jecisc\GitBridge""
+
+	GBBridge sourceDirectory. ""File @ C:\Users\JeCisC\Pharo\GitRepositories\jecisc\GitBridge\src""
+
+	GBBridge currentBranchName. ""'master'""
+
+	GBBridge tagsOfCurrentCommit. ""#()""
+
+	GBBridge tagsOfClosestTaggedAncestor. ""an Array(IceTag: 'v1.0.0' IceTag: 'v1.x.x')""
+
+	GBBridge version. ""'master'""
+
+	GBBridge closestVersion. ""'v1.0.0'""
+
+	GBBridge versionOrBranchNameWithLastTag. ""'master (from v1.0.0)'""
+	
+	GBBridge openInNativeFileSystem.
+"
 Class {
 	#name : #GitBridge,
 	#superclass : #Object,
@@ -28,7 +71,7 @@ GitBridge class >> do: aBlock onRepositoryProblem: anotherBlock [
 
 { #category : #actions }
 GitBridge class >> findIcebergRepository [
-	^ IceRepository registry detect: [ :each | (each includesPackageNamed: self package name) and: [ self isValidRepositoryForBridge: each ] ] ifNone: [ GBRepositoryNotFound signalFor: self ]
+	^ IceRepository registry detect: [ :each |  self isValidRepository: each ] ifNone: [ GBRepositoryNotFound signalFor: self ]
 ]
 
 { #category : #versions }
@@ -52,8 +95,8 @@ GitBridge class >> isAbstract [
 ]
 
 { #category : #testing }
-GitBridge class >> isValidRepositoryForBridge: anIcebergRepository [
-	^ true
+GitBridge class >> isValidRepository: anIcebergRepository [
+	^ anIcebergRepository includesPackageNamed: self package name
 ]
 
 { #category : #actions }
