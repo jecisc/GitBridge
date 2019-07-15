@@ -36,7 +36,7 @@ By default, a bridge will be made to the first Iceberg repository registered mee
 
 In case none of those conditions are met, special exceptions will be launched: `GBRepositoryNotFound` or `GBRepositoryWithoutLocalRepository`.
 
-### Add more condition on teh bridge selection
+### Add conditions on the bridge selection
 
 The previous section show how to create bridges for simple projects, but sometime it is not enough. For example, if the package containing your bridge is present in multiple project, you might want to add more conditions to your repository lookup.
 
@@ -52,5 +52,42 @@ MyProjectBridge class>>isValidRepository: anIcebergRepository
 The second way is to override the method `findIcebergRepository` to create your own lookup.
 
 ## Access resources and informations
+
+Once your bridge created, you have the possibility to access divers informations.
+
+### Access to local resources
+
+One of the main feature of GitBridge is to be able to access to local resources. Before Pharo improved its git integration, we used Monticello to store code. Monticello did not allow the developeur to store files. Thus, a lot of project stored files in memory or downloaded them during the installation. Now, with GitBridge, we can just store them in a git repository and access them from the image via a GitBridge.
+
+This can be useful in many case such has:
+- Storing files used as test resources
+- Access to CSS, JS or image files for web applications
+- Storing documentation in Markdown format to get a nice rendering in Github/Bitbucket/Gitlab
+- ...
+
+Access to those files can be easily done via the GitBridge:
+
+```Smalltalk
+MyProjectBridge root.	"Return a FileReference to the root folder of the git repository."
+
+MyProjectBridge sourceDirectory.	"Return a FileReference to the source directory of the project."
+```
+
+You can also create your own access methods such as:
+
+```Smalltalk
+MyProjectBridge class>>resources
+	^ self root / 'resources'
+```
+
+### Get informations of the project version
+
+TODO
+
+### Actions
+
+TODO
+
+## Use GitBridge in CI environment
 
 TODO
