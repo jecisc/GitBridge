@@ -4,7 +4,7 @@ GitBridge is a project allow Pharo projects to communicate with the git reposito
 
 This documentation will cover the creation of a GitBridge for your project and all the different features it propose.
 
->> Some notes like this one will be present in the documentation. They will give implementation details since there is not enough material to do a full page on implementation details.
+> Some notes like this one will be present in the documentation. They will give implementation details since there is not enough material to do a full page on implementation details.
 
 ## Create a bridge for your project
 
@@ -28,7 +28,7 @@ MyProjectBridge class>>initialize
 
 This will allow the bridge to reset some cache at the image startup.
 
->> When you access your bridge for the first time after you launched your image, the Iceberg repository linked to your project will be cached. By registering your bridge to the SessionManager you will provide a way to your image to clear this cache at startup in case you moved your image. If you need to clear the cache yourself, you can call the method `#reset` on your git bridge.
+> When you access your bridge for the first time after you launched your image, the Iceberg repository linked to your project will be cached. By registering your bridge to the SessionManager you will provide a way to your image to clear this cache at startup in case you moved your image. If you need to clear the cache yourself, you can call the method `#reset` on your git bridge.
 
 By default, a bridge will be made to the first Iceberg repository registered meeting two conditions:
 - The repository need to contain the package in which the bridge is defined (here `MyProject`)
