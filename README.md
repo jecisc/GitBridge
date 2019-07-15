@@ -21,6 +21,7 @@ To add it to your baseline:
     spec
     	baseline: 'GitBridge'
     	with: [ spec repository: 'github://jecisc/GitBridge:v1.x.x/src' ]
+```
 
 Note that you can replace the #v1.x.x by another branch such as #development or a tag such as #v1.0.0, #v1.? or #v1.1.?.
 
