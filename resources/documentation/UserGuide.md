@@ -46,7 +46,7 @@ The first one is to override the method `#isValideRepository:`. This method will
 
 ```Smalltalk
 MyProjectBridge class>>isValidRepository: anIcebergRepository
-	^ (super isValidRepository: anIcebergRepository) and: [ anIcebergRepository includesPackageNamed: 'BaselineOfPharo' ]
+	^ (super isValidRepository: anIcebergRepository) and: [ (anIcebergRepository includesPackageNamed: 'BaselineOfPharo') not ]
 ```
 
 The second way is to override the method `findIcebergRepository` to create your own lookup.
