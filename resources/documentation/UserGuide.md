@@ -94,25 +94,62 @@ It can often be useful to display version infos for a project. Git bridge allows
 Example: 
 
 ```Smalltalk
-	MyProjectBridge gitTags. "an Array(IceTag: 'v0.1.0' IceTag: 'v1.0.0' IceTag: 'v1.0.x' IceTag: 'v1.x.x')"
+MyProjectBridge gitTags. "an Array(IceTag: 'v0.1.0' IceTag: 'v1.0.0' IceTag: 'v1.0.x' IceTag: 'v1.x.x')"
 
-	MyProjectBridge currentBranchName. "'master'"
+MyProjectBridge currentBranchName. "'master'"
 
-	MyProjectBridge tagsOfCurrentCommit. "#()"
+MyProjectBridge tagsOfCurrentCommit. "#()"
 
-	MyProjectBridge tagsOfClosestTaggedAncestor. "an Array(IceTag: 'v1.0.0' IceTag: 'v1.0.x' IceTag: 'v1.x.x')"
+MyProjectBridge tagsOfClosestTaggedAncestor. "an Array(IceTag: 'v1.0.0' IceTag: 'v1.0.x' IceTag: 'v1.x.x')"
 
-	MyProjectBridge version. "'master'"
+MyProjectBridge version. "'master'"
 
-	MyProjectBridge closestVersion. "'v1.0.0'"
+MyProjectBridge closestVersion. "'v1.0.0'"
 
-	MyProjectBridge versionOrBranchNameWithLastTag. "'master (from v1.0.0)'"
+MyProjectBridge versionOrBranchNameWithLastTag. "'master (from v1.0.0)'"
 ```
 
 ### Actions
 
-TODO
+GitBridge can also be used to unable some actions.
+
+For now, only one action is possible: open in the Native file browser the root folder of the git repository.
+
+```Smalltalk
+MyProjectBridge openInNativeFileSystem
+```
 
 ## Use GitBridge in CI environment
 
-TODO
+If you use your Git Bridge to access resources in tests, you might need some extra setup with your continuous integration.
+
+For Jenkins, if you use a bash script, you might not need any extra step since you will probably load your project with the Iceberg integration enabled.
+
+In Travis, if you use SmalltalkCI, you will need to register your repository in Iceberg since SmalltalkCI disable the Metacello integration of Iceberg.
+
+You can do this via a pre testing script in your smalltalk.ston file. For example:
+
+```Smalltalk
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'GitBridge',
+      #directory : 'src'
+    }
+  ],
+  #preTesting : SCICustomScript {
+    #path : 'resources/ci/addRepoToIceberg.st'
+  }
+}
+```
+
+The script will look like this:
+
+```Smalltalk
+(IceRepositoryCreator new
+	location: '.' asFileReference;
+	subdirectory: 'src';
+	createRepository) register
+```
+
+Where `src` will need to be changed to correspond to your code subdirectory.
