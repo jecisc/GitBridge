@@ -6,6 +6,15 @@ This documentation will cover the creation of a GitBridge for your project and a
 
 > Some notes like this one will be present in the documentation. They will give implementation details since there is not enough material to do a full page on implementation details.
 
+- [Create a bridge for your project](#create-a-bridge-for-your-project)
+  * [Create a simple bridge](#create-a-simple-bridge)
+  * [Add conditions on the bridge selection](#add-conditions-on-the-bridge-selection)
+- [Access resources and informations](#access-resources-and-informations)
+  * [Access to local resources](#access-to-local-resources)
+  * [Get informations of the project version](#get-informations-of-the-project-version)
+  * [Actions](#actions)
+- [Use GitBridge in CI environment](#use-gitbridge-in-ci-environment)
+
 ## Create a bridge for your project
 
 ### Create a simple bridge
