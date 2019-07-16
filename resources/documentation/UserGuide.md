@@ -82,7 +82,32 @@ MyProjectBridge class>>resources
 
 ### Get informations of the project version
 
-TODO
+It can often be useful to display version infos for a project. Git bridge allows one to access such infos. Here is a description of the API:
+- `#gitTags` : Return the list of all tags of the project.
+- `#currentBranchName` : Return the name of the current branch.
+- `#tagsOfCurrentCommit` : Return the tags of the current commit. If none, return an empty array.
+- `#tagsOfClosestTaggedAncestor` : Return the tags of the closest ancestor with tags.
+- `#version` : Return a string which can either be a tag name of the current commit or a branch name in case the commit has no tag.
+- `#closestVersion` :  Return a string which can either be the tag name of the closest tagged ancestor commit or a branch name in case the project has no tag.
+- `#versionOrBranchNameWithLastTag` : Return the name of a tag of the current commit, in case there is none, return the name of the current branch with the tag name of the closest ancestor in parenthesis.
+
+Example: 
+
+```Smalltalk
+	MyProjectBridge gitTags. "an Array(IceTag: 'v0.1.0' IceTag: 'v1.0.0' IceTag: 'v1.0.x' IceTag: 'v1.x.x')"
+
+	MyProjectBridge currentBranchName. "'master'"
+
+	MyProjectBridge tagsOfCurrentCommit. "#()"
+
+	MyProjectBridge tagsOfClosestTaggedAncestor. "an Array(IceTag: 'v1.0.0' IceTag: 'v1.0.x' IceTag: 'v1.x.x')"
+
+	MyProjectBridge version. "'master'"
+
+	MyProjectBridge closestVersion. "'v1.0.0'"
+
+	MyProjectBridge versionOrBranchNameWithLastTag. "'master (from v1.0.0)'"
+```
 
 ### Actions
 
