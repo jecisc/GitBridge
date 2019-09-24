@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/jecisc/GitBridge.svg?branch=master)](https://travis-ci.org/jecisc/GitBridge)
 
-GitBridge is a project allow Pharo projects to communicate with the git repository storing them. Once the bridge is made, you can access resources or informations about the repository.
+GitBridge is a project which allow Pharo projects to communicate with the git repository storing them. Once the bridge is made, you can access resources in or information about the repository.
 
 - [Installation](#installation)
 - [Quick start](#quick-start)
@@ -43,7 +43,7 @@ GitBridge subclass: #MyProjectBridge
 	package: 'MyProject'
 ```
 
-This new bridge need a class initialization like this one:
+This new bridge needs a class initialization like this one:
 
 ```Smalltalk
 MyProjectBridge class>>initialize
@@ -52,7 +52,7 @@ MyProjectBridge class>>initialize
 
 This will allow the bridge to reset some cache at the image startup.
 
-Now that your bridge is created, if it find an Iceberg repository, associated to its local clone, containing the package in which the bridge is defined, you will be able to use the bridge to access some resources.
+Now that your bridge is created, if it finds an Iceberg repository, associated to its local clone, containing the package in which the bridge is defined, you will be able to use the bridge to access some resources.
 
 For example you can get a file reference to the git folder like this:
 
@@ -80,7 +80,7 @@ You can find the full documentation here : [User documentation](resources/docume
 
 ## Version management 
 
-This project use semantic versioning to define the releases. This means that each stable release of the project will be assigned a version number of the form `vX.Y.Z`. 
+This project uses semantic versioning to define the releases. This means that each stable release of the project will be assigned a version number of the form `vX.Y.Z`. 
 
 - **X** defines the major version number
 - **Y** defines the minor version number 
