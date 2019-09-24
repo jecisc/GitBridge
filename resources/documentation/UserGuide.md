@@ -1,8 +1,8 @@
 # User documentation of GitBridge
 
-GitBridge is a project allow Pharo projects to communicate with the git repository storing them. Once the bridge is made, you can access resources or informations about the repository.
+GitBridge is a project allowing Pharo projects to communicate with the git repository storing them. Once the bridge is made, you can access resources in and get information about the repository.
 
-This documentation will cover the creation of a GitBridge for your project and all the different features it propose.
+This documentation will cover the creation of a GitBridge for your project and all the different features it offers.
 
 > Some notes like this one will be present in the documentation. They will give implementation details since there is not enough material to do a full page on implementation details.
 
@@ -28,7 +28,7 @@ GitBridge subclass: #MyProjectBridge
 	package: 'MyProject'
 ```
 
-This new bridge need a class initialization like this one:
+This new bridge needs a class initialization like this one:
 
 ```Smalltalk
 MyProjectBridge class>>initialize
@@ -40,18 +40,18 @@ This will allow the bridge to reset some cache at the image startup.
 > When you access your bridge for the first time after you launched your image, the Iceberg repository linked to your project will be cached. By registering your bridge to the SessionManager you will provide a way to your image to clear this cache at startup in case you moved your image. If you need to clear the cache yourself, you can call the method `#reset` on your git bridge.
 
 By default, a bridge will be made to the first Iceberg repository registered meeting two conditions:
-- The repository need to contain the package in which the bridge is defined (here `MyProject`)
-- The repository need to have a local clone of the project
+- The repository needs to contain the package in which the bridge is defined (here `MyProject`)
+- The repository needs to have a local clone of the project
 
 In case none of those conditions are met, special exceptions will be launched: `GBRepositoryNotFound` or `GBRepositoryWithoutLocalRepository`.
 
 ### Add conditions on the bridge selection
 
-The previous section show how to create bridges for simple projects, but sometime it is not enough. For example, if the package containing your bridge is present in multiple project, you might want to add more conditions to your repository lookup.
+The previous section shows how to create bridges for simple projects, but sometimes this is not enough. For example, if the package containing your bridge is present in multiple projects, you might want to add more conditions to your repository lookup.
 
-This is possible in two way.
+This is possible in two ways.
 
-The first one is to override the method `#isValideRepository:`. This method will be called with each iceberg repositories as parameter. In case we want to select the first repository containing the package of the bridge but that does not contain a package `BaselineOfPharo` we can do:
+The first one is to override the method `#isValideRepository:`. This method will be called with each iceberg repository as parameter. In case we want to select the first repository containing the package of the bridge that does not contain a package `BaselineOfPharo` we can do:
 
 ```Smalltalk
 MyProjectBridge class>>isValidRepository: anIcebergRepository
@@ -60,13 +60,13 @@ MyProjectBridge class>>isValidRepository: anIcebergRepository
 
 The second way is to override the method `findIcebergRepository` to create your own lookup.
 
-## Access resources and informations
+## Access resources and information
 
-Once your bridge created, you have the possibility to access divers informations.
+Once your bridge created, you have the possibility to access diverse information.
 
 ### Access to local resources
 
-One of the main feature of GitBridge is to be able to access to local resources. Before Pharo improved its git integration, we used Monticello to store code. Monticello did not allow the developeur to store files. Thus, a lot of project stored files in memory or downloaded them during the installation. Now, with GitBridge, we can just store them in a git repository and access them from the image via a GitBridge.
+One of the main feature of GitBridge is to be able to access local resources. Before Pharo improved its git integration, we used Monticello to store code. Monticello did not allow the developer to store files. Thus, a lot of projects stored files in memory or downloaded them during the installation. Now, with GitBridge, we can just store them in a git repository and access them from the image via a GitBridge.
 
 This can be useful in many case such has:
 - Storing files used as test resources
@@ -89,9 +89,9 @@ MyProjectBridge class>>resources
 	^ self root / 'resources'
 ```
 
-### Get informations of the project version
+### Get information of the project version
 
-It can often be useful to display version infos for a project. Git bridge allows one to access such infos. Here is a description of the API:
+It can often be useful to display version info for a project. Git bridge allows one to access such info. Here is a description of the API:
 - `#gitTags` : Return the list of all tags of the project.
 - `#currentBranchName` : Return the name of the current branch.
 - `#tagsOfCurrentCommit` : Return the tags of the current commit. If none, return an empty array.
@@ -120,7 +120,7 @@ MyProjectBridge versionOrBranchNameWithLastTag. "'master (from v1.0.0)'"
 
 ### Actions
 
-GitBridge can also be used to unable some actions.
+GitBridge can also be used to enable some actions.
 
 For now, only one action is possible: open in the Native file browser the root folder of the git repository.
 
