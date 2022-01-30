@@ -13,6 +13,7 @@ repo := IceRepositoryCreator new
 'CREATE' traceCr.
 
 repo validate. 
+repo isCloning traceCr.
 
 'Create 2' traceCr.
 
