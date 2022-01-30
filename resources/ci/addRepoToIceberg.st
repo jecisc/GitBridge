@@ -5,4 +5,6 @@
 (IceRepositoryCreator new
 	location: '.' asFileReference;
 	subdirectory: 'src';
-	createRepository) register
+	createRepository) register.
+	
+'End pre script' traceCr
