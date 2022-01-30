@@ -26,6 +26,7 @@ repo isCloning traceCr.
 
 head := repo repository workingCopy repository head.
 head name traceCr.
+repo repository repositoryHandle traceCr.
 head commitsDo: [:c | c id traceCr ].
 repo repository repositoryHandle.
 
