@@ -1,6 +1,6 @@
 'Execute pre testing scripts' traceCr.
 
-FileReference workingDirectory pathString traceCr.
+FileLocator workingDirectory pathString traceCr.
 
 (IceRepositoryCreator new
 	location: '.' asFileReference;
