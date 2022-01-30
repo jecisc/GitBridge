@@ -15,9 +15,23 @@ repo := IceRepositoryCreator new
 repo validate. 
 repo isCloning traceCr.
 
-'Create 2' traceCr.
+	repo repository location: repo locationToUse.
+	
+	
+'CREATE2' traceCr.
+	repo repository pluginManager repositoryWillBeCreated: repo repository.
+		
+'CREATE3' traceCr.	
+	repo repository workingCopy initializePackagesFromRepository.
+	
+'CREATE4' traceCr.
+	repo doEnsureProject. 	
 
-repo := repo createRepository.
+'CREATE5' traceCr.
+	repo repository pluginManager repositoryWasCreated: repo repository.
+	
+'CREATE6' traceCr.
+	repo := repo repository	
 
 'Register' traceCr.
 
