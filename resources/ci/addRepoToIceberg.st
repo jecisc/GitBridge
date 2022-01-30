@@ -1,4 +1,4 @@
-| repo |
+| repo head |
 'Execute pre testing scripts' traceCr.
 
 '.' asFileReference entries traceCr.
@@ -22,6 +22,12 @@ repo isCloning traceCr.
 	repo repository pluginManager repositoryWillBeCreated: repo repository.
 		
 'CREATE3' traceCr.	
+
+
+head := repo repository workingCopy repository head.
+head name traceCr.
+head commitsDo: [:c | c id traceCr ].
+
 	repo repository workingCopy initializePackagesFromRepository.
 	
 'CREATE4' traceCr.
