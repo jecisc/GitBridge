@@ -31,7 +31,7 @@ repo isCloning traceCr.
 	repo repository pluginManager repositoryWasCreated: repo repository.
 	
 'CREATE6' traceCr.
-	repo := repo repository	
+	repo := repo repository.	
 
 'Register' traceCr.
 
