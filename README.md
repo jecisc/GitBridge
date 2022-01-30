@@ -1,7 +1,5 @@
 # GitBridge
 
-[![Build Status](https://travis-ci.org/jecisc/GitBridge.svg?branch=master)](https://travis-ci.org/jecisc/GitBridge)
-
 GitBridge is a project which allow Pharo projects to communicate with the git repository storing them. Once the bridge is made, you can access resources in or information about the repository.
 
 - [Installation](#installation)
@@ -94,7 +92,7 @@ Thus, it should be safe to depend on a fixed major version and moving minor vers
 
 | Version 	| Compatible Pharo versions 		|
 |-------------	|---------------------------	|
-| 1.x.x       	| Pharo 70, 80					|
+| 1.x.x       	| Pharo 70, 80, 90				|
 
 ## Contact
 
