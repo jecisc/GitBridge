@@ -12,6 +12,9 @@ repo := IceRepositoryCreator new
 	
 'CREATE' traceCr.
 
+repo validate. 
+
+'Create 2' traceCr.
 
 repo := repo createRepository.
 
