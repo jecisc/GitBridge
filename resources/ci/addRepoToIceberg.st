@@ -1,10 +1,22 @@
+| repo |
 'Execute pre testing scripts' traceCr.
 
 '.' asFileReference entries traceCr.
 
-(IceRepositoryCreator new
+'Init' traceCr.
+
+repo := IceRepositoryCreator new
 	location: '.' asFileReference;
 	subdirectory: 'src';
-	createRepository) register.
+	yourself.
+	
+'CREATE' traceCr.
+
+
+repo := repo createRepository.
+
+'Register' traceCr.
+
+repo register.
 	
 'End pre script' traceCr
