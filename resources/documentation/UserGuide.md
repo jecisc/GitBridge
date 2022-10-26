@@ -165,13 +165,13 @@ Where `src` will need to be changed to correspond to your code subdirectory.
 
 ### Use GitHub actions
 
-When using GitHub actions, it is necessary to configure the `actions/checkout@v2` to fetch the all commits history.
+When using GitHub actions, it is necessary to configure the `actions/checkout@v3` to fetch the all commits history.
 
 Using the action looks like this:
 
 ```yml
 steps:
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@v3
     with:
       fetch-depth: '0'
 ```
