@@ -20,7 +20,7 @@ jobs:
         smalltalk: [ Pharo64-7.0, Pharo64-8.0, Pharo64-9.0, Pharo64-10 ]
     name: ${{ matrix.smalltalk }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
           with:
             fetch-depth: '0'
       - uses: hpi-swa/setup-smalltalkCI@v1
