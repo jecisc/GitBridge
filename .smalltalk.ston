@@ -2,10 +2,8 @@ SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'GitBridge',
-      #directory : 'src'
+      #directory : 'src',
+      #registerInIceberg : true   
     }
-  ],
-  #preTesting : SCICustomScript {
-    #path : 'resources/ci/addRepoToIceberg.st'
-  }
+  ]
 }
