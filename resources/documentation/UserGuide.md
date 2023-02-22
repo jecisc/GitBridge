@@ -134,34 +134,21 @@ If you use your Git Bridge to access resources in tests, you might need some ext
 
 For Jenkins, if you use a bash script, you might not need any extra step since you will probably load your project with the Iceberg integration enabled.
 
-In Travis, if you use SmalltalkCI, you will need to register your repository in Iceberg since SmalltalkCI disable the Metacello integration of Iceberg.
+If you use SmalltalkCI (in Github actions, gitlab ci or other supported CI), you will need to register your repository in Iceberg since SmalltalkCI disable the Metacello integration by default.
 
-You can do this via a pre testing script in your smalltalk.ston file. For example:
+You can do this via your smalltalk.ston file. For example:
 
 ```Smalltalk
 SmalltalkCISpec {
   #loading : [
     SCIMetacelloLoadSpec {
       #baseline : 'GitBridge',
-      #directory : 'src'
+      #directory : 'src',
+      #registerInIceberg : true
     }
-  ],
-  #preTesting : SCICustomScript {
-    #path : 'resources/ci/addRepoToIceberg.st'
-  }
+  ]
 }
 ```
-
-The script will look like this:
-
-```Smalltalk
-(IceRepositoryCreator new
-	location: '.' asFileReference;
-	subdirectory: 'src';
-	createRepository) register
-```
-
-Where `src` will need to be changed to correspond to your code subdirectory.
 
 ### Use GitHub actions
 
