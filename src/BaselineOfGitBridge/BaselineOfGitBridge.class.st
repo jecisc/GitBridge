@@ -32,5 +32,5 @@ BaselineOfGitBridge >> nativeBrowser: spec [
 
 { #category : #accessing }
 BaselineOfGitBridge >> projectClass [
-	^ MetacelloCypressBaselineProject
+	^ self class environment at: #MetacelloCypressBaselineProject ifAbsent: [ super projectClass ]
 ]
